@@ -1,2 +1,35 @@
+image: docker:latest
 
-  
+services:
+- docker:dind
+
+before_script:
+    - apt-get install -y python-dev python-pip
+    - pip install awscli --upgrade --user
+
+stages:
+    - tests
+    - build
+    - dev_deploy
+    - deploy
+
+tests:
+    stage: tests
+    script:
+    
+build:
+    stage: build
+    script:
+        - some script
+
+dev_deploy:
+    stage: dev_deploy
+    script:
+        - some script
+    except:
+        - master
+
+
+    
+
+
