@@ -1,34 +1,21 @@
-image: docker:latest
+image: microsoft/dotnet:latest
 
-services:
-- docker:dind
+variables:
+   # AWS_ACCESS_KEY_ID: "YUOUR_AWS_ACCESS_KEY_ID"
+   # AWS_SECRET_ACCESS_KEY: “YOUR_AWS_SECRET_ACCESS_KEY”
+    S3_BUCKET_NAME: "dotnetapilambda-bucket"
 
 before_script:
-    - apt-get install -y python-dev python-pip
-    - pip install awscli --upgrade --user
+    - dotnet restore
 
 stages:
-    - tests
-    - build
-    - dev_deploy
     - deploy
 
-tests:
-    stage: tests
+deploy:
     script:
-    
-build:
-    stage: build
-    script:
-        - some script
-
-dev_deploy:
-    stage: dev_deploy
-    script:
-        - some script
-    except:
-        - master
-
+        - dotnet build
+        - dotnet lambda deploy-serverless DotNetApiLambda --package pacakge.zip --template serverless.template --s3-bucket $S3_BUCKET_NAME
+            -- --aws-access-key-id $AWS_ACCESS_KEY_ID --aws-secret-key $AWS_SECRET_ACCESS_KEY --region us-east-1
 
     
 
