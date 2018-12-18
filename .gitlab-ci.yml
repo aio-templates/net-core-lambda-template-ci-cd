@@ -16,5 +16,5 @@ deploy:
     stage: deploy
     script:
         - dotnet build
-        - dotnet lambda deploy-serverless DotNetApiLambda --package pacakge.zip --template serverless.template --s3-bucket $S3_BUCKET_NAME
+        - dotnet lambda deploy-serverless DotNetApiLambda --template serverless.template --s3-bucket $S3_BUCKET_NAME
             -- --aws-access-key-id $AWS_ACCESS_KEY_ID --aws-secret-key $AWS_SECRET_ACCESS_KEY --region us-east-1
