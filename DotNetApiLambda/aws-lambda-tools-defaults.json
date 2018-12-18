@@ -9,8 +9,8 @@
 		"All the command line options for the Lambda command can be specified in this file."
 	],
 	
-    "profile":"",
-    "region" : "",
+  "profile":"",
+  "region" : "",
 	"configuration" : "Release",
 	"framework"     : "netcoreapp2.1",
 	"s3-prefix"     : "DotNetApiLambda/",
